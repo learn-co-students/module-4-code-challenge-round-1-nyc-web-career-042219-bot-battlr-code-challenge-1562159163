@@ -4,16 +4,17 @@ import YourBotArmy from "./YourBotArmy"
 import BotSpecs  from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
   state = {
    allBots: [],
    myBots: [],
    specBot: {},
-   showSpecs: false
+   showSpecs: false,
+   sortingOption: null
  }
 
   componentDidMount() {
-    //console.log("hello yes start")
+    console.log("%c hello yes start", "font-size:20px;font-weight:bold;color:#fd4;text-shadow:2px 2px 2px #f52, -2px -2px 2px #ae6;font-family:monospace")
+
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
     .then(res => res.json())
     .then(botData => {
@@ -51,12 +52,70 @@ class BotsPage extends React.Component {
 
   render() {
     //console.log(this.state);
+
+    let sortedBots = [...this.state.allBots]
+    switch (this.state.sortingOption) {
+    case "ID":
+      sortedBots = [...this.state.allBots].sort((a, b) => {
+        return a.index - b.index
+      })
+      break
+    case "name":
+      sortedBots = [...this.state.allBots].sort((a, b) => {
+        return a.name.localeCompare(b.name)
+      })
+      break
+    case "health":
+      sortedBots = [...this.state.allBots].sort((a, b) => {
+        return a.health - b.health
+      })
+      break
+    case "damage":
+      sortedBots = [...this.state.allBots].sort((a, b) => {
+        return a.damage - b.damage
+      })
+      break
+    case "armor":
+      sortedBots = [...this.state.allBots].sort((a, b) => {
+        return a.armor - b.armor
+      })
+      break
+    case "class":
+      sortedBots = [...this.state.allBots].sort((a, b) => {
+        return a.bot_class.localeCompare(b.bot_class)
+      })
+      break
+    }
+
+
+
     return (
       <div>
         < YourBotArmy
           bots={this.state.myBots}
           botClickHandler={this.removeBotFromArmy}
         />
+
+        <form
+          className="bot-sorter"
+          style={{marginLeft: 100}}
+          onChange={event => {
+            this.setState({
+              sortingOption: event.target.value
+            })
+          }}
+        >
+          <label htmlFor="sort-select">Sort bots by: </label>
+          <select id="sort-select" defaultValue="none">
+            <option value="none" disabled>None</option>
+            <option value="ID">ID</option>
+            <option value="name">Name</option>
+            <option value="health">Health</option>
+            <option value="damage">Damage</option>
+            <option value="armor">Armor</option>
+            <option value="class">Class</option>
+          </select>
+        </form><br />
 
         {this.state.showSpecs ?
             < BotSpecs
@@ -66,7 +125,7 @@ class BotsPage extends React.Component {
             />
           :
             < BotCollection
-              bots={this.state.allBots}
+              bots={sortedBots}
               botClickHandler={this.toggleSpecs}
             />
         }
