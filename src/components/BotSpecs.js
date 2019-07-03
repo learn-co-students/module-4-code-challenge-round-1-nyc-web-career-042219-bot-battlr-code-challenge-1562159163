@@ -1,5 +1,5 @@
 import React from "react";
-
+import  BootCollection from "../containers/BotCollection"
 const BotSpecs = props => {
   let { bot } = props;
 
