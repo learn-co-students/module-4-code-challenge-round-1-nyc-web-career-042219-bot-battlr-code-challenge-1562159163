@@ -24,18 +24,18 @@ state ={
 
 addBot = (id)=> {
 if (this.state.myBots.find(bot=>bot.id === id) === undefined){
-  let newArr = this.state.myBots
-  let foundBot = this.state.bots.find(bot=>bot.id === id)
-  newArr.push(foundBot)
-  this.setState({myBots: newArr})
+  // let newArr = this.state.myBots
+  // let foundBot = this.state.bots.find(bot=>bot.id === id)
+  // newArr.push(foundBot)
+  this.setState({myBots: [...this.state.myBots, this.state.bots.find(bot=>bot.id === id)]})
   }
 }
 
 
-removeBot = (id) =>{
-  this.setState({
-    myBots: this.state.myBots.filter(bot=> bot.id !== id)})
-}
+  removeBot = (id) =>{
+    this.setState({
+      myBots: this.state.myBots.filter(bot=> bot.id !== id)})
+  }
 
 
         render() {
