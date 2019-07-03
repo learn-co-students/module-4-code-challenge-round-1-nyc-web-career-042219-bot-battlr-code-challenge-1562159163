@@ -11,7 +11,7 @@ class BotCollection extends React.Component {
     		  {/*...and here..*/}
     		  Collection of all bots
 			  {this.props.state.bots.map ((bot) => {
-				  return < BotCard bot={bot} key={bot.id}/>
+				  return < BotCard bot={bot} key={bot.id} botClickHandler={this.props.botClickHandler}/>
 			  })}
     		</div>
   	  </div>

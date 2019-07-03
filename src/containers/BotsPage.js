@@ -6,7 +6,20 @@ class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
-    bots: []
+    bots: [],
+    myBotArmy: []
+  }
+
+  botClickHandler = (event, key) => {
+    console.log(key)
+    // debugger
+    let selectedBot = this.state.bots.find(function(bot) {
+      return bot.id === key
+    });
+    console.log(selectedBot)
+    this.setState({
+      myBotArmy: [...this.state.myBotArmy, selectedBot]
+    })
   }
 
   componentDidMount() {
@@ -19,8 +32,8 @@ class BotsPage extends React.Component {
     console.log(this.state)
     return (
       <div>
-        < YourBotArmy />
-        <BotCollection state = {this.state}/>
+        < YourBotArmy state = {this.state}/>
+        <BotCollection state = {this.state} botClickHandler={this.botClickHandler}/>
       </div>
     );
   }
