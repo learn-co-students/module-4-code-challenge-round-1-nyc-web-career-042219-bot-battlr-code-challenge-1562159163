@@ -13,6 +13,7 @@ class BotsPage extends React.Component {
     yourBotArmy: [],
     currentBot: ''
   }
+  //modify state to pass info from Bot Spec to Bot Cards so it renders when recruiting a bot
 
   handleCurrentBot = (botObj) =>{
     this.setState({
@@ -20,6 +21,7 @@ class BotsPage extends React.Component {
     })
   }
 
+  //first version
   handleClick = (botObj) =>{
     if (botObj.enlisted !== true) {
       botObj.enlisted = true
@@ -39,6 +41,22 @@ class BotsPage extends React.Component {
     }
   }
 
+
+  //refactor for second version
+  handleRecruitClick = (botObj) =>{
+    this.setState({
+      yourBotArmy: [...this.state.yourBotArmy, botObj],
+      allBots: [...this.state.allBots, botObj]
+    })
+  }
+
+  handleGoBack = (e) =>{
+    e.persist()
+    this.setState({
+      currentBot: ''
+    })
+  }
+
   displayBotArmy = () =>{
     return <BotCollection allBots={this.state.allBots} handleClick={this.handleClick} handleCurrentBot={this.handleCurrentBot}/>
   }
@@ -54,11 +72,11 @@ class BotsPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.yourBotArmy)
+    console.log(this.state.currentBot)
     return (
       <div>
         {<YourBotArmy yourBotArmy={this.state.yourBotArmy} handleClick={this.handleClick} handleCurrentBot={this.handleCurrentBot}/>}
-        {this.state.currentBot === '' ? this.displayBotArmy() : 'display current bot specs, refactor click to recruit bot to bot specs card'}
+        {this.state.currentBot === '' ? this.displayBotArmy() : <BotSpecs bot={this.state.currentBot} handleRecruitClick={this.handleRecruitClick} handleGoBack={this.handleGoBack} currentBot={this.state.currentBot}/>}
       </div>
     );
   }

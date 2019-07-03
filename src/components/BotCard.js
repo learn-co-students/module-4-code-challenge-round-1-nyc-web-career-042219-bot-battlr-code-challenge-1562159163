@@ -21,15 +21,15 @@ const BotCard = props => {
       botType = <div />;
   }
 
-  /// if current Bot, display extra items 
+  /// if current Bot, display extra items
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => props.handleClick(bot)}
+        onClick={() =>props.handleCurrentBot(bot)}
       >
-        <div className="image" onClick={() =>props.handleCurrentBot(bot)}>
+        <div className="image" >
           <img alt="oh no!" src={bot.avatar_url} />
         </div>
         <div className="content">
