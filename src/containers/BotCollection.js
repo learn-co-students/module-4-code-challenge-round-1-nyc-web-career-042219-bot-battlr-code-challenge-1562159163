@@ -6,35 +6,20 @@ import BotSpecs from "../components/BotSpecs"
 //tried to refactor and keep my click to remove from Bot Army, but ran out of time. So Pissed.
 class BotCollection extends React.Component {
 	//your code here
-	state = {
-		currentBot: {}
-	}
 
-	setCurrentBot = (bot) => {
-		this.setState({
-			currentBot: bot
-		})
-	}
-
-	removeCurrentBot = () => {
-		this.setState({
-			currentBot: {}
-		})
-	}
-
-
+	//rendered the bots with a conditional for the refactor so that if no bot is selected with the specific ID, then all bots, else return the spec of the bot with the selected ID
 	renderBots = () => {
-		if(!this.state.currentBot.id){
+		if(!this.props.currentBot.id){
 			return (
 				<div className="row">
-					{this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} setCurrentBot={this.setCurrentBot}/>)}
+					{this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} setCurrentBot={this.props.setCurrentBot} />)}
 				</div>
 			) 
 		} else {
 			return (
 				<BotSpecs 
-					bot={this.state.currentBot}
-					removeCurrentBot={this.removeCurrentBot}
+					bot={this.props.currentBot}
+					removeCurrentBot={this.props.removeCurrentBot}
 					addToMyArmy={this.props.addToMyArmy}
 				/>
 			)
