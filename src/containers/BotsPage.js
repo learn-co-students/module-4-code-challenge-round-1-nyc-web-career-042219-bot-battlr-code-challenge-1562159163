@@ -6,9 +6,24 @@ class BotsPage extends React.Component {
 
   state = {
   	bots: [],
-  	YourBotArmy: [],
+  	yourBotArmy: [],
   	currentBot: {}
   }
+
+  toggleArmyBotClick = (bot) => {
+  	if (!this.state.yourBotArmy.includes(bot)){
+	  	this.setState({
+	  		yourBotArmy: [...this.state.yourBotArmy, bot],
+	  		currentBot: bot
+	  	})
+  	} else {
+  		let newArmy = this.state.yourBotArmy.filter(armyBot => armyBot.id !== bot.id)
+	  	this.setState({
+	  		yourBotArmy: newArmy
+	  	})
+  	}
+  }
+
 
   componentDidMount(){
   	fetch("https://bot-battler-api.herokuapp.com/api/v1/bots")
@@ -23,9 +38,8 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-      	<YourBotArmy />
-      	<BotCollection bots={this.state.bots}/>
-        {/* put your components here */}
+      	<YourBotArmy toggleArmyBotClick={this.toggleArmyBotClick} yourBotArmy={this.state.yourBotArmy}/>
+      	<BotCollection toggleArmyBotClick={this.toggleArmyBotClick} bots={this.state.bots}/>
       </div>
     );
   }
