@@ -13,7 +13,7 @@ class BotsPage extends React.Component {
  }
 
   componentDidMount() {
-    console.log("%c hello yes start", "font-size:20px;font-weight:bold;color:#fd4;text-shadow:2px 2px 2px #f52, -2px -2px 2px #ae6;font-family:monospace")
+    console.log("%c bots bots bots", "font-size:20px;font-weight:bold;color:#fd4;text-shadow:2px 2px 2px #f52, -2px -2px 2px #ae6;font-family:monospace")
 
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
     .then(res => res.json())
