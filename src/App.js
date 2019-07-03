@@ -23,7 +23,7 @@ class App extends Component {
   handleBot = (bot) => {
     if (this.state.botArmy.includes(bot)) {
         let remainingBots = this.state.botArmy.filter(robot => {
-          return robot !== bot
+          return robot !== bot 
         })
         this.setState({
           botArmy: remainingBots
@@ -45,3 +45,8 @@ class App extends Component {
 }
 
 export default App;
+
+
+/// I need to figure out a way to return null for when I click on a bot in the collection that is already in the botArmy, while
+/// still maintaing the functionality of being able to remove a bot from the collection
+/// directly
