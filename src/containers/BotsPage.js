@@ -4,6 +4,7 @@ import YourBotArmy from "./YourBotArmy"
 import BotSpecs from "../components/BotSpecs"
 import SortForm from '../components/SortForm'
 import ArmySearch from '../components/ArmySearch'
+import SortByArmor from '../components/SortByArmor'
 
 class BotsPage extends React.Component {
 
@@ -12,7 +13,8 @@ class BotsPage extends React.Component {
   	yourBotArmy: [],
   	currentBot: null,
   	sortType: "All",
-  	searchTerm: null
+  	searchTerm: null,
+  	sortArmor: false
   }
 
   toggleArmyBotClick = (bot) => {
@@ -74,6 +76,20 @@ class BotsPage extends React.Component {
   	}
   }
 
+
+toggleSortArmor = () => {
+	this.setState({
+		sortArmor: !this.state.sortArmor
+	})
+}
+
+sortByArmor = () => {
+	if (this.state.sortArmor){
+		return this.state.bots.sort(function(a, b){return a.armor-b.armor})
+	} else {
+		return this.state.bots
+	}
+}
   componentDidMount(){
   	fetch("https://bot-battler-api.herokuapp.com/api/v1/bots")
   	.then(res => res.json())
@@ -85,12 +101,13 @@ class BotsPage extends React.Component {
   }
 
   render() {
-  	console.log(this.state.searchTerm)
+  	console.log(this.state.sortArmor)
     return (
       <div>
       	<ArmySearch handleSearchChange={this.handleSearchChange} />
       	<YourBotArmy toggleArmyBotClick={this.toggleArmyBotClick} yourBotArmy={this.findArmyBotBySearch()}/>	
       	<SortForm handleSortChange={this.handleSortChange } />
+      	<SortByArmor toggleSortArmor={this.toggleSortArmor}/>
       	<br />
       	{this.state.currentBot ? <BotSpecs clearCurrentBot={this.clearCurrentBot} toggleArmyBotClick={this.toggleArmyBotClick} bot={this.state.currentBot} /> : <BotCollection getCurrentBot={this.getCurrentBot} bots={this.filterTheseBots()}/>}
       </div>
