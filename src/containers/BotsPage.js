@@ -1,6 +1,8 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
+// import { prependOnceListener } from "cluster";
 
 class BotsPage extends React.Component {
 
@@ -22,8 +24,8 @@ class BotsPage extends React.Component {
     return selectedBot
   }
 
-  intoArmy = (id) => {
-    let selectedBot = this.findBot(id)
+  intoArmy = (props) => {
+    let selectedBot = this.findBot(props.id)
 
     if(this.state.selected.includes(selectedBot)) {
       return null
@@ -34,8 +36,8 @@ class BotsPage extends React.Component {
     }
   }
 
-  outOfArmy = (id) => {
-    let selectedBot = this.findBot(id)
+  outOfArmy = (props) => {
+    let selectedBot = this.findBot(props.id)
   
     let index = this.state.selected.indexOf(selectedBot)
 
@@ -57,6 +59,7 @@ class BotsPage extends React.Component {
         <BotCollection 
           bots={this.state.bots}
           intoArmy={this.intoArmy}
+          findBot={this.findBot}
         />
       </div>
     );

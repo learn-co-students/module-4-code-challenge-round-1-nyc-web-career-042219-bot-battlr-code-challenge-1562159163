@@ -12,7 +12,7 @@ class YourBotArmy extends React.Component {
             {this.props.selected.map(bot =>
               <BotCard
                 {...bot}
-                key={bot.id}
+                // key={bot.id}
                 handleClick={this.props.outOfArmy}
               />
             )}
