@@ -15,24 +15,21 @@ class BotsPage extends React.Component {
   handleClick = (botObj) =>{
     if (botObj.enlisted !== true) {
       botObj.enlisted = true
-      console.log(botObj)
       this.setState({
         yourBotArmy: [...this.state.yourBotArmy, botObj],
         allBots: [...this.state.allBots, botObj]
       })
     } else {
-      // let foundBot = this.state.yourBotArmy.find(bot=> bot.id === foundBot.id)
-      // let updatedBotArmy = this.state.yourBotArmy.map(bot=>{
-      //   if (bot.id === botObj.id) {
-      //     return {...foundBot, enlisted: false}
-      //   } else {
-      //     return bot
-      //   }
-      // })
-      // this.setState({
-      //   yourBotArmy: updatedBotArmy,
-      //   allBots: [...this.state.allBots, botObj]
-      // })
+      // console.log(botObj)
+      // console.log(this.state.yourBotArmy)
+      let foundBot = this.state.yourBotArmy.find(bot=> bot.id === botObj.id)
+      foundBot.enlisted = false
+      console.log(foundBot)
+      let updatedBotArmy = this.state.yourBotArmy.filter(bot=>bot.id !== foundBot.id)
+      this.setState({
+        yourBotArmy: updatedBotArmy,
+        allBots: [...this.state.allBots, foundBot]
+      })
     }
 
   }
