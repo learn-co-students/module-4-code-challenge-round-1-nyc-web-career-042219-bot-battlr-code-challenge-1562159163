@@ -24,7 +24,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={(event) => props.botClickHandler(event, bot.id)}
+        onClick={(event) => props.botClickHandler(event, bot.id)} //I would have to add a ternary here to determine which click handler to use.
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
