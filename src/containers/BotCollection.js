@@ -53,20 +53,3 @@ class BotCollection extends React.Component {
 };
 
 export default BotCollection;
-
-
-//             <BotCard key={bot.id} bot={bot} viewBot={this.setCurrentBot} />
-//           ))}
-//         </div>
-//       );
-//     } else {
-//       return (
-//         <BotSpecs
-//           bot={this.state.currentBot}
-//           enlist={this.props.addToArmy}
-//           goBack={this.clearCurrentBot}
-//           addToArmy={this.props.addToArmy}
-//         />
-//       );
-//     }
-//   };
