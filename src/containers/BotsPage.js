@@ -1,11 +1,15 @@
 import React from "react";
-import BotCard from '../components/BotCard'
+// import BotCard from '../components/BotCard'
 import YourBotArmy from './YourBotArmy'
+import BotCollection from './BotCollection'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   state = {
     bots: [],
-    army: []
+    army: [],
+    selectedBot: "",
+    displayShow: false
   }
 
   fetchBots = () => {
@@ -22,30 +26,24 @@ class BotsPage extends React.Component {
     this.fetchBots()
   }
 
-  handleClick = (props) => {
-    if(props.collection === true){//if card was clicked on container
-      console.log('clicked in container')
-      console.log(this.state.army) //but this is only reflected after the second click...
-      if (this.state.army.includes(props)) {
-        // this.setState({
-        //   army: [...this.state.army]
-        // })
-        console.log('already added')
-        return
-      } else {
-        this.setState({
-          army: [...this.state.army, props],
-        })
-      }
-    } else if(props.army === true){//if card was clicked in army
-      console.log('clicked in army')
-      console.log(this.state.army)
-      this.setState({
-        army: [...this.state.army.filter(bot => bot !== props)]
-        //return everything from army arr state that does not match the clicked bot aka remove bot from arr and rerender
-      })
+  handleEnlist = (id) => {
+    if (this.state.army.find(bot=>bot.id === id) === undefined ){
+      const newBot = this.state.bots.find(bot=> bot.id === id)
+      this.setState({ army: [...this.state.army, newBot]})
     }
-    
+  }
+
+ 
+  handleRemove = (id) =>{
+  const updateArr = [...this.state.army.filter(bot=>bot.id !== id)]
+    this.setState({ army: updateArr})
+  }
+
+  selectBot = (id)=>{
+    let selectbot = this.state.bots.find(bot=> bot.id===id)
+    this.setState({ selectedBot: selectbot})
+    this.setState({ displayShow: !this.state.displayShow },()=>console.log(this.state))
+
   }
 
   render() {
@@ -54,17 +52,22 @@ class BotsPage extends React.Component {
       <div>
         <YourBotArmy 
           army={this.state.army}
-          handleClick={this.handleClick}
+          handleClick={this.handleRemove}
+          handleRemove={this.handleRemove}
         />
-
-        {this.state.bots.map(bot => 
-          <BotCard 
-            bot={bot}
-            key={bot.id}
-            collection={true} //set a key to differentiate where the card lives
-            handleClick={this.handleClick}
-          />)}
         
+      <BotCollection
+          bots={this.state.bots}
+          selectedBot={this.state.selectedBot}
+          handleEnlist={this.handleEnlist}
+          handleSelect={this.selectBot}
+          displayShow={this.state.displayShow}
+        />}
+
+        {/* <BotCollection 
+          bots={this.state.bots}
+          handleClick={this.handleClick}
+        /> */}
       </div>
     );
   }
