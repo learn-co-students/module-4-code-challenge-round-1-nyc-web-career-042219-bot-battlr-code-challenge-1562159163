@@ -25,8 +25,8 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy myBots={this.props.myBots} removeBot={this.props.removeBot}  />
-        <BotCollection bots={this.props.bots} addBot={this.props.addBot} botSelect={this.props.botSelect}  singleDisplay={this.state.singleDisplay} changeDisplay={this.changeDisplay} />
+        <YourBotArmy myBots={this.props.myBots} removeBot={this.props.removeBot} />
+        <BotCollection bots={this.props.bots} addBot={this.props.addBot} botSelect={this.botSelect} selectedBot={this.state.selectedBot}  singleDisplay={this.state.singleDisplay} changeDisplay={this.changeDisplay} />
       </div>
     );
   }

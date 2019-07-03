@@ -15,7 +15,7 @@ class BotCollection extends React.Component {
     		<div className="row">
     		  Collection of all bots
         { this.props.singleDisplay ?
-          <BotSpecs bot={this.state.selectedBot} changeDisplay={this.changeDisplay} handleClick={this.props.addBot}/>
+          <BotSpecs bot={this.props.selectedBot} changeDisplay={this.props.changeDisplay} handleClick={this.props.addBot}/>
           :
             this.props.bots.map(bot => <BotCard key={bot.id} {...bot}  handleClick={this.props.botSelect}/>)
           }
