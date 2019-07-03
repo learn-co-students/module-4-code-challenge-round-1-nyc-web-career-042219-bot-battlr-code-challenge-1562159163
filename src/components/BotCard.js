@@ -2,7 +2,7 @@ import React from "react";
 
 const BotCard = props => {
   const { bot } = props;
-  console.log(props)
+
   let botType;
 
   switch (props.bot_class) {
@@ -18,7 +18,7 @@ const BotCard = props => {
     default:
       botType = <div />;
   }
-
+  
   return (
     <div className="ui column">
       <div
