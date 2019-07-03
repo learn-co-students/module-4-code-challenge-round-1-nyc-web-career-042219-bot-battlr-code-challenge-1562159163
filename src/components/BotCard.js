@@ -1,4 +1,5 @@
 import React from "react";
+import BotSpecs from './BotSpecs'
 
 const BotCard = props => {
   // console.log(props)
@@ -20,6 +21,7 @@ const BotCard = props => {
       botType = <div />;
   }
 
+  /// if current Bot, display extra items 
   return (
     <div className="ui column">
       <div
@@ -27,7 +29,7 @@ const BotCard = props => {
         key={bot.id}
         onClick={() => props.handleClick(bot)}
       >
-        <div className="image">
+        <div className="image" onClick={() =>props.handleCurrentBot(bot)}>
           <img alt="oh no!" src={bot.avatar_url} />
         </div>
         <div className="content">

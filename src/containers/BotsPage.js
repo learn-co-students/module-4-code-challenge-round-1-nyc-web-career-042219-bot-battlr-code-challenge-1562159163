@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
@@ -9,7 +10,14 @@ class BotsPage extends React.Component {
 
   state = {
     allBots: [],
-    yourBotArmy: []
+    yourBotArmy: [],
+    currentBot: ''
+  }
+
+  handleCurrentBot = (botObj) =>{
+    this.setState({
+      currentBot: botObj
+    })
   }
 
   handleClick = (botObj) =>{
@@ -20,8 +28,6 @@ class BotsPage extends React.Component {
         allBots: [...this.state.allBots, botObj]
       })
     } else {
-      // console.log(botObj)
-      // console.log(this.state.yourBotArmy)
       let foundBot = this.state.yourBotArmy.find(bot=> bot.id === botObj.id)
       foundBot.enlisted = false
       console.log(foundBot)
@@ -31,7 +37,10 @@ class BotsPage extends React.Component {
         allBots: [...this.state.allBots, foundBot]
       })
     }
+  }
 
+  displayBotArmy = () =>{
+    return <BotCollection allBots={this.state.allBots} handleClick={this.handleClick} handleCurrentBot={this.handleCurrentBot}/>
   }
 
   componentDidMount(){
@@ -48,8 +57,8 @@ class BotsPage extends React.Component {
     console.log(this.state.yourBotArmy)
     return (
       <div>
-        {<YourBotArmy yourBotArmy={this.state.yourBotArmy} handleClick={this.handleClick}/>}
-        {<BotCollection allBots={this.state.allBots} handleClick={this.handleClick}/>}
+        {<YourBotArmy yourBotArmy={this.state.yourBotArmy} handleClick={this.handleClick} handleCurrentBot={this.handleCurrentBot}/>}
+        {this.state.currentBot === '' ? this.displayBotArmy() : 'display current bot specs, refactor click to recruit bot to bot specs card'}
       </div>
     );
   }
