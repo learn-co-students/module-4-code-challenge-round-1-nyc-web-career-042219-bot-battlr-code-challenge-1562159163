@@ -2,7 +2,6 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 class YourBotArmy extends React.Component {
-  //your bot army code here...
 
   render(){
     return (
@@ -13,7 +12,8 @@ class YourBotArmy extends React.Component {
               <BotCard 
                 bot={beef.bot} 
                 key={beef.bot.id}
-                cont={'army'}
+                army={true} //add a key to help event handling identify whether the card was clicked in collection or army
+                handleClick={this.props.handleClick}
               />)}
           </div>
         </div>

@@ -3,7 +3,6 @@ import BotCard from '../components/BotCard'
 import YourBotArmy from './YourBotArmy'
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
   state = {
     bots: [],
     army: []
@@ -24,30 +23,48 @@ class BotsPage extends React.Component {
   }
 
   handleClick = (props) => {
-    // if(props.army === false) {
+    if(props.collection === true){//if card was clicked on container
+      console.log('clicked in container')
+      console.log(this.state.army) //but this is only reflected after the second click...
+      if (this.state.army.includes(props)) {
+        // this.setState({
+        //   army: [...this.state.army]
+        // })
+        console.log('already added')
+        return
+      } else {
+        this.setState({
+          army: [...this.state.army, props],
+        })
+      }
+    } else if(props.army === true){//if card was clicked in army
+      console.log('clicked in army')
+      console.log(this.state.army)
       this.setState({
-        army: [...this.state.army, props]
+        army: [...this.state.army.filter(bot => bot !== props)]
+        //return everything from army arr state that does not match the clicked bot aka remove bot from arr and rerender
       })
-      console.log('army', this.state.army)
-      // props.army = !props.army
     }
+    
+  }
 
   render() {
-    console.log('rendered bots:', this.state)
+    // console.log('rendered bots:', this.state)
     return (
       <div>
         <YourBotArmy 
           army={this.state.army}
+          handleClick={this.handleClick}
         />
 
         {this.state.bots.map(bot => 
           <BotCard 
             bot={bot}
             key={bot.id}
-            cont={'collection'}
-            // army={false}
+            collection={true} //set a key to differentiate where the card lives
             handleClick={this.handleClick}
           />)}
+        
       </div>
     );
   }
