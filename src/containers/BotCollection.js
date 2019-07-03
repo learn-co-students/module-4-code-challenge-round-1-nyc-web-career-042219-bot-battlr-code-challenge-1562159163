@@ -3,7 +3,7 @@ import BotCard from "../components/BotCard";
 
 class BotCollection extends React.Component {
   makeCards = () => {
-    return this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} toggleArmyBotClick={this.props.toggleArmyBotClick}/>)
+    return this.props.bots.map(bot => <BotCard key={bot.id} bot={bot} getCurrentBot={this.props.getCurrentBot}/>)
   }
 
   render(){
