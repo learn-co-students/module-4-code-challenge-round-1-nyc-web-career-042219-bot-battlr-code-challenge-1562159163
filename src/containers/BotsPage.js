@@ -1,23 +1,33 @@
 import React from "react";
 import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy"
+import BotSpecs  from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
-     allBots: [],
-     myBots: []
+   allBots: [],
+   myBots: [],
+   specBot: {},
+   showSpecs: false
  }
 
   componentDidMount() {
-     console.log("hello start")
-     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
-     .then(res => res.json())
-     .then(botData => {
-        this.setState({
-           allBots: botData
-        })
-     })
+    //console.log("hello yes start")
+    fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
+    .then(res => res.json())
+    .then(botData => {
+      this.setState({
+        allBots: botData
+      })
+    })
+  }
+
+  toggleSpecs = (bot) => {
+    this.setState({
+      specBot: bot,
+      showSpecs: !this.state.showSpecs
+    })
   }
 
   addBotToArmy = (bot) => {
@@ -26,6 +36,7 @@ class BotsPage extends React.Component {
         myBots: [...this.state.myBots, bot]
       })
     }
+    this.toggleSpecs()
   }
 
   removeBotFromArmy = (bot) => {
@@ -46,10 +57,19 @@ class BotsPage extends React.Component {
           bots={this.state.myBots}
           botClickHandler={this.removeBotFromArmy}
         />
-        < BotCollection
-          bots={this.state.allBots}
-          botClickHandler={this.addBotToArmy}
-        />
+
+        {this.state.showSpecs ?
+            < BotSpecs
+              bot={this.state.specBot}
+              goBackHandler={this.toggleSpecs}
+              enlistHandler={this.addBotToArmy}
+            />
+          :
+            < BotCollection
+              bots={this.state.allBots}
+              botClickHandler={this.toggleSpecs}
+            />
+        }
       </div>
     );
   }
