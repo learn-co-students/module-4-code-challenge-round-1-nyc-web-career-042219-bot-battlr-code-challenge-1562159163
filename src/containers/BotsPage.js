@@ -13,7 +13,7 @@ class BotsPage extends React.Component {
   }
 
   enlistBot = (bot) => {
-    console.log('clicked a bot', bot);
+    // console.log('clicked a bot', bot);
     if(this.state.army.indexOf(bot) == -1){
       this.state.army.push(bot)
       this.setState({
@@ -23,7 +23,7 @@ class BotsPage extends React.Component {
   }
 
   deenlistBot = (bot) => {
-    console.log('clicked to deenlist', bot);
+    // console.log('clicked to deenlist', bot);
     let botIndex = this.state.army.indexOf(bot)
     this.state.army.splice(botIndex, 1)
     this.setState({
