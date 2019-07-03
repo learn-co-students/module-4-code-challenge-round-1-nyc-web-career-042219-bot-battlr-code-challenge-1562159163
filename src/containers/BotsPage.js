@@ -27,8 +27,8 @@ class BotsPage extends React.Component {
     // console.log(this.props.botCollection)
     return (
       <div>
-        <BotCollection handleClick={this.handleClick} botCollection={this.props.botCollection} />
         <YourBotArmy handleClick={this.handleClick} myArmy={this.state.myArmy} />
+        <BotCollection handleClick={this.handleClick} botCollection={this.props.botCollection} />
       </div>
     );
   }
