@@ -10,7 +10,8 @@ class BotsPage extends React.Component {
   state ={
     bots: [],
     army: [],
-    currentBot: null
+    currentBot: null,
+    filter: ""
   }
   componentDidMount = () =>{
     fetch(URL)
@@ -51,8 +52,19 @@ class BotsPage extends React.Component {
     })
   }
 
+  updateFilter = (e) => {
+    this.setState({
+      filter: e.target.value
+    })
+  }
+
+  filterBots = () => {
+    let filteredBots = [...this.state.bots].filter(bot => bot.bot_class.includes(this.state.filter) )
+    return filteredBots
+  }
+
   render() {
-    console.log(this.state.army)
+   
     return (
       <div>
         <YourBotArmy removeBotFromArmy={this.removeBotFromArmy} army={this.state.army}/>
@@ -60,7 +72,7 @@ class BotsPage extends React.Component {
         ?
         <BotSpecs addBotToArmy={this.addBotToArmy} resetCurrentBot={this.resetCurrentBot} bot={this.state.currentBot}/>
         :
-        <BotCollection updateCurrentBot={this.updateCurrentBot} bots = {this.state.bots}/>
+        <BotCollection filter={this.state.filter} updateFilter={this.updateFilter} updateCurrentBot={this.updateCurrentBot} bots = {this.filterBots()}/>
       }
       </div>
     );
