@@ -60,8 +60,8 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={
-                props.resetCurrentBot
+              onClick={ () =>
+                props.updateCurrentBot(null)
               }
             >
               Go Back

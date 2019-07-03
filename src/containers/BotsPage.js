@@ -30,7 +30,7 @@ class BotsPage extends React.Component {
         army: updatedArmy
       }) 
     }
-    this.resetCurrentBot()
+    this.updateCurrentBot(null)
   }
 
   removeBotFromArmy = (bot) =>{
@@ -43,12 +43,6 @@ class BotsPage extends React.Component {
   updateCurrentBot = (bot) => {
     this.setState({
       currentBot: bot
-    })
-  }
-
-  resetCurrentBot = () => {
-    this.setState({
-      currentBot: null
     })
   }
 
@@ -70,7 +64,7 @@ class BotsPage extends React.Component {
         <YourBotArmy removeBotFromArmy={this.removeBotFromArmy} army={this.state.army}/>
         {this.state.currentBot 
         ?
-        <BotSpecs addBotToArmy={this.addBotToArmy} resetCurrentBot={this.resetCurrentBot} bot={this.state.currentBot}/>
+        <BotSpecs addBotToArmy={this.addBotToArmy} updateCurrentBot={this.updateCurrentBot} bot={this.state.currentBot}/>
         :
         <BotCollection filter={this.state.filter} updateFilter={this.updateFilter} updateCurrentBot={this.updateCurrentBot} bots = {this.filterBots()}/>
       }
