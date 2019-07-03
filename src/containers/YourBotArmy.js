@@ -1,5 +1,6 @@
 import React from "react";
 import BotCard from "../components/BotCard";
+import BotSpecs from "../components/BotSpecs"
 
 class YourBotArmy extends React.Component {
   //your bot army code here...
