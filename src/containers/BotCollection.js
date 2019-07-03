@@ -10,6 +10,9 @@ class BotCollection extends React.Component {
     		<div className="row">
     		  {/*...and here..*/}
     		  Collection of all bots
+			  {this.props.state.bots.map ((bot) => {
+				  return < BotCard bot={bot} key={bot.id}/>
+			  })}
     		</div>
   	  </div>
   	);
