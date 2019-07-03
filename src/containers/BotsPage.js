@@ -1,12 +1,15 @@
 import React from "react";
 import BotCollection from './BotCollection';
 import YourBotArmy from './YourBotArmy';
+import BotSpecs from '../components/BotSpecs';
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     bots: [],
     botArmy: [],
+    renderInfo: false,
+    specificBot: null
   }
 
   componentDidMount() {
@@ -23,9 +26,7 @@ class BotsPage extends React.Component {
     const botToAddToArmy = this.state.bots.find(bot => bot.id === botId)
     if (e.target.parentElement.parentElement.parentElement.parentElement.id === 'army') {
       const indexOfBot = this.state.botArmy.indexOf(botToAddToArmy)
-      // const removed = this.state.botArmy.splice(indexOfBot, 1);
-      // console.log('Removed:', removed.length)
-      // console.log('State:', this.state.botArmy.length);
+      this.state.botArmy.splice(indexOfBot, 1);
       return this.setState({
         botArmy: [...this.state.botArmy],
       });
@@ -33,10 +34,11 @@ class BotsPage extends React.Component {
     if (this.checkIfBotIsAlreadyInArmy(botToAddToArmy)) {
       alert('Can\'t recruit the same bot more than once.')
     } else {
-      this.state.botArmy.push(botToAddToArmy);
-      this.setState({
-        botArmy: [...this.state.botArmy],
-      })
+      // this.state.botArmy.push(botToAddToArmy);
+      // this.setState({
+      //   botArmy: [...this.state.botArmy],
+      // })
+      this.setState({ renderInfo: true, specificBot: botToAddToArmy })
     }
   }
 
@@ -45,7 +47,7 @@ class BotsPage extends React.Component {
       <div>
         {/* put your components here */}
         <YourBotArmy botArmy={this.state.botArmy} handleClick={this.handleClick}/>
-        <BotCollection bots={this.state.bots} handleClick={this.handleClick}/>
+        {this.state.renderInfo ? <BotSpecs bot={this.state.specificBot} addToArmy={this.handleClick} /> : <BotCollection bots={this.state.bots} handleClick={this.handleClick}/>}
       </div>
     );
   }
