@@ -12,7 +12,7 @@ class YourBotArmy extends React.Component {
           <div className="row bot-army-row">
             Tim's Bot Army
             {this.props.botArmy.map(bot => {
-            return <BotCard key={bot.id} bot={bot}/>
+            return <BotCard key={bot.id} bot={bot} handleBot={this.props.handleBot}/>
             })}
           </div>
         </div>
@@ -23,10 +23,3 @@ class YourBotArmy extends React.Component {
 };
 
 export default YourBotArmy;
-
-
-/// I have the bot I want in my botArmy already, if I click on
-/// a bot from the collection they are added to my army. I can
-/// not add the same bot twice.
-/// Now what I need to do, is remove a bot from my army, on a click
-///
