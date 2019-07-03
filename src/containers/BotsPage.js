@@ -32,13 +32,17 @@ class BotsPage extends React.Component {
       });
     }
     if (this.checkIfBotIsAlreadyInArmy(botToAddToArmy)) {
-      alert('Can\'t recruit the same bot more than once.')
-    } else {
-      // this.state.botArmy.push(botToAddToArmy);
-      // this.setState({
-      //   botArmy: [...this.state.botArmy],
-      // })
-      this.setState({ renderInfo: true, specificBot: botToAddToArmy })
+      alert('Can\'t recruit the same bot more than once.');
+    } else if (e.target.innerText === 'Enlist') {
+      this.state.botArmy.push(botToAddToArmy);
+      this.setState({
+        botArmy: [...this.state.botArmy],
+        renderInfo: false
+      });
+    } else if (e.target.innerText === 'Go Back'){
+      this.setState({renderInfo: false});
+    }else {
+      this.setState({ renderInfo: true, specificBot: botToAddToArmy });
     }
   }
 
