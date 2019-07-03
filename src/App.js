@@ -21,9 +21,13 @@ class App extends Component {
   }
 
   handleBot = (bot) => {
-    this.setState({
-      botArmy: [...this.state.botArmy, bot]
-    })
+    if (this.state.botArmy.includes(bot)) {
+      return null
+    } else {
+      this.setState({
+        botArmy: [...this.state.botArmy, bot]
+      })
+    }
   }
 
   render() {
