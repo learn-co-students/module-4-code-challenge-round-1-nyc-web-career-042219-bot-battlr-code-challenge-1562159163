@@ -22,7 +22,12 @@ class App extends Component {
 
   handleBot = (bot) => {
     if (this.state.botArmy.includes(bot)) {
-      return null
+        let remainingBots = this.state.botArmy.filter(robot => {
+          return robot !== bot
+        })
+        this.setState({
+          botArmy: remainingBots
+        })
     } else {
       this.setState({
         botArmy: [...this.state.botArmy, bot]

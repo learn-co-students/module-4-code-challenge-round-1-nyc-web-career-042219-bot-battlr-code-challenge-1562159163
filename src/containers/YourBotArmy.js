@@ -23,3 +23,10 @@ class YourBotArmy extends React.Component {
 };
 
 export default YourBotArmy;
+
+
+/// I have the bot I want in my botArmy already, if I click on
+/// a bot from the collection they are added to my army. I can
+/// not add the same bot twice.
+/// Now what I need to do, is remove a bot from my army, on a click
+///
